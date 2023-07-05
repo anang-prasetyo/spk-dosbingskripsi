@@ -1,0 +1,392 @@
+
+@media screen and (min-width: 769px) {
+  div.base {
+    margin: 3rem 0.75rem 0 0.75rem;
+  }
+  img.welcome-logo {
+    max-height: 1.5rem;
+  }
+  #layout{
+    &-left, &-mid, &-right {
+      flex: none;
+    }
+    &-right, &-left {
+      width: 17.66666674%;
+    }
+    &-mid {
+      width: 64.66666674%;
+    }
+    &-left{
+      &-mobile {
+        display: none;
+      }
+      a.side-menu {
+        padding-left: 1rem;
+      }
+      &-open {
+        div.side{
+          &-top {
+            padding-left: 4rem;
+            padding-right: 4rem;
+          }
+          &-bot{
+            padding: 1rem 4rem;
+          }
+        }
+        a.side-menu {
+          padding-left: 4rem;
+        }
+      }
+    }
+    &-right{
+      &-mobile {
+        display: none;
+      }
+      &-title-mobile{
+        display: none !important;
+      }
+    }
+  }
+  div.content-my {
+    &--head {
+      padding: 1rem calc(17.66666674% + 7vw);
+    }
+  }
+  #icon-menu {
+    display: none !important;
+  }
+  //sidebar
+  div.side{
+    &-top {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    &-menu {
+      padding-left: 1rem;
+    }
+    &-bot{
+      padding: 1rem;
+    }
+    &-bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+  //pesan
+  #pesan-content-my--head{
+    display: none;
+  }
+  #pesan{
+    &-sender-mobile {
+      display: none;
+    }
+    &-isi {
+      &-mobile, &-header-arrow{
+        display: none;
+      }
+    }
+  }
+  //head
+  #head {
+    &-welcome {
+      padding: 5rem 8rem 10rem 8rem;
+    }
+  }
+  div.rumus-1{
+    width: 58.33333337%;
+  }
+  #signup-mobile {
+    display: none;
+  }
+  #signup{
+    &-kotak-1 {
+      width: 100%;
+      max-width: 75%;
+    }
+    &-edit-my--profil {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  #chatBoxMobile {
+    display: none;
+  }
+  div.foo{
+    padding: 2rem 3rem !important;
+    &-right-mobile {
+      padding: 0 3rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #signup-mobile{
+    &-kotak-1 {
+      width: 100%;
+      max-width: 89%;
+    }
+    &-edit-my--profil {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  #sideMenu{
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  div.base {
+    margin: 3rem 0 0 0;
+  }
+  div.skeleton div.left{
+    padding: 2rem !important;
+  }
+  img.welcome-logo {
+    max-height: 2.25rem;
+  }
+  div.welcome{
+    &-popup{
+      width: 90% !important;
+    }
+    &-left, &-right {
+      text-align: center;
+    }
+    &-left {
+      margin-top: 2rem;
+      &-1 {
+        font-size: 3rem !important;
+        font-weight: 600 !important;
+        color: $primary;
+      }
+      &-2 {
+        margin-top: 1rem;
+      }
+    }
+    &-right {
+      margin-bottom: 2rem;
+      min-height: 0 !important;
+    }
+    &-text1{
+      padding: 2rem;
+    }
+  }
+  #layout{
+    margin: 0;
+    &-left, &-mid, &-right {
+      flex: none;
+    }
+    &-left-mobile {
+      visibility: hidden;
+      top: -100%;
+      position: fixed;
+    }
+    &-left, &-right {
+      display: none;
+    }
+    &-right-title{
+      display: none;
+    }
+  }
+  div.kotak-1{
+    max-width: 80% !important;
+  }
+  div.card-bubble-my {
+    padding: 4rem 2rem !important;
+    border-radius: 0 !important;
+  }
+  div.content-my{
+    &--title {
+      font-size: 1rem !important;
+    }
+    &--head {
+      padding: 1rem 2rem;
+      &-value {
+        margin: 0;
+        // font-size: 1rem !important;
+      }
+    }
+    &--main {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  //sidebar
+  div.side{
+    &-top {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      &-title{
+        font-size: 1.25rem !important;
+      }
+    }
+    &-bot{
+      padding: 1rem 2rem;
+      &-title{
+        font-size: 1.25rem !important;
+      }
+    }
+  }
+  a.router-link-active{
+    border-radius: 0 !important;
+  }
+  a.side-menu {
+    padding-left: 2rem;
+    &:hover{
+      border-radius: 0 !important;
+    }
+  }
+  //pesan
+  #pesan-content-my{
+    &--head {
+      padding: 1rem 2rem;
+    }
+  }
+  #pesan { 
+    &-sender {
+      display: none;
+    }
+    &-isi {
+      display: none;
+      &-header-text {
+        max-width: 70%;
+      }
+      &-top {
+        &-fixed{
+          padding: 1rem;
+          width: 100%;
+        }
+        &-text-skeleton {
+          width: 100%;
+        }
+      }
+      &-bottom {
+        &-fixed{
+          padding: .5rem 1rem;
+          width: 100%;
+        }
+      }
+    }
+  }
+  div.pesan{
+    &-user, &-status{
+      font-size: 1rem !important;
+    }
+  }
+  div.isi-pesan {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  div.fixed-pesan-left {
+    min-height: 0vh;
+  }
+  div.head-pesan{
+    &-left {
+      padding: 4rem 2rem 1rem 2rem;
+      // margin-top: 3rem;
+      &--title {
+        padding: 0;
+      }
+    }
+  }
+  div.contact {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  //head
+  #head {
+    &-welcome {
+      padding: 4rem 2rem 10rem 2rem;
+      margin: 4rem 0 0 0 !important;
+      border-radius: 0 !important;
+    }
+    &-component {
+      margin: auto .5rem;
+    }
+  }
+  div.head-my-2 {
+    min-height: 20rem !important;
+    max-height: 20rem !important;
+  }
+  //card
+  div.card-my--title {
+    &-1 {
+      font-size: 1rem !important;
+    }
+    &-2 {
+      font-size: 1.25rem !important;
+    }
+  }
+  //signup
+  #signup {
+    display: none;
+  }
+  #signup-mobile{
+    &-kotak-1 {
+      width: 100%;
+      max-width: 89%;
+    }
+    &-edit-my--profil {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  #login {
+    margin: 0 !important;
+    min-height: 100vh;
+    &-right {
+      display: none;
+    }
+    &-left {
+      padding: 0 !important;
+    }
+  }
+  div.rumus{
+    &, &-2{
+      flex-direction: column !important;
+    }
+    &-1{
+      width: 100%;
+    }
+  }
+  #chatBox {
+    display: none;
+  }
+  div.saw-doc {
+    align-items: center !important;
+    &-right{
+      gap: 1rem;
+      &-bot{
+        flex-direction: column;
+      }
+    }
+  }
+  div.foo{
+    margin-bottom: -1rem !important;
+    padding: 2rem 1rem !important;
+    &-right-mobile {
+      margin: 3rem 2rem;
+      &-rumah {
+        margin: 3rem 1.75rem;
+      }
+    }
+    &-cols{
+      width: 100%;
+    }
+  }
+  #foo-component {
+    margin: auto 1.5rem -1rem 1.5rem;
+  }
+  div.cr {
+    padding: 1rem .25rem !important;
+  }
+  #icon-headline {
+    display: none;
+  }
+}

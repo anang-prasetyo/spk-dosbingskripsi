@@ -1,0 +1,504 @@
+@import './styles.scss';
+
+//mode
+:root {
+  --dark-bg: #1e2023;
+  --dark-layout: #18191c;
+  --dark-border: #3c3c3c;
+  --dark-bg2: #141417;
+  --dark-shades1: #242429;
+  --dark-shades2: #3b3b44;
+  --dark-shades3: #53535f;
+  --dark-bg3: #161619;
+  --dark-color: #fff;
+  --dark-color2: #8d8fa2;
+  --dark-placeholder: rgba(255,255,255,.25);
+  --dark-primary: #ae80ff;
+  --dark-danger: #ff808b;
+  --dark-link: #4d80ff;
+  --dark-info: #92ede0;
+  --dark-success: #7bd973;
+  --dark-warning: #ffcf4d;
+
+  --light-bg: #fff;
+  --light-layout: #f4f7f8;
+  --light-border: rgba(0,0,0,.05);
+  --light-bg2: #eef2f5;
+  --light-bg3: #d5d8de;
+  --light-color: #000;
+  --light-color2: #85858A;
+  --light-primary: #6d1aff;
+}
+.dark-mode{
+  &-bg, &-layout, &-color{
+    transition: all .5s ease;
+  }
+  &-bg, &-layout{
+    color: var(--dark-color);
+  }
+  &-bg{
+    // color: #b5b8d0;
+    background: var(--dark-bg);
+    &2{
+      background: var(--dark-bg2);
+    }
+    &3{
+      background: var(--dark-bg3);
+    }
+  }
+  &-layout{
+    background: var(--dark-layout);
+    // color: #8d8fa2;
+  }
+  &-shades{
+    &1, &2, &3{
+      color: white;
+    }
+    &1{
+      background: var(--dark-shades1);
+    }
+    &2{
+      background: var(--dark-shades2);
+    }
+    &3{
+      background: var(--dark-shades3);
+    }
+  }
+  &-color{
+    color: var(--dark-color);
+    &2{
+      color: var(--dark-color2);
+    }
+  }
+  &-primary {
+    background: var(--dark-primary);
+    color: white;
+  }
+  &-border{
+    &-top{
+      border-top: 1px solid var(--dark-border);
+    }
+    &-bottom{
+      border-bottom: 1px solid var(--dark-border);
+    }
+  }
+  &-placeholder{
+    color: var(--dark-placeholder);
+  }
+  &-table{
+    & thead{
+      & tr{
+        &:first-child{
+          &:hover{
+            background: var(--dark-shades2);
+          }
+        }
+      }
+    }
+    & tbody{
+      & tr{
+        &:hover{
+          background: var(--dark-bg2);
+        }
+      }
+    }
+  }
+  &-input-my {
+    &, input {
+      color: $white;
+      &::placeholder {
+        color: var(--dark-placeholder);
+      }
+    }
+    &--input, &--input-nh{
+      background: var(--dark-layout);
+      &-active {
+        box-shadow: 0 5px 20px -10px rgba($white,.3);
+      }
+    }
+    &--input {
+      &:hover,
+      &-active {
+        box-shadow: 0 5px 20px -10px rgba($white,.3);
+      }
+    }
+    &-email {
+      &, input {
+        color: $white;
+        &::placeholder {
+            color: var(--dark-placeholder);
+        }
+      }
+      &--input {
+        background: var(--dark-layout);
+        &:hover,
+        &-active {
+          box-shadow: 0 5px 20px -10px rgba($white,.3);
+        }
+      }
+    }
+  }
+  &-textarea-my {
+    &, textarea {
+      &::placeholder {
+        color: var(--dark-placeholder);
+      }
+    }
+    &--input {
+      color: var(--dark-color);
+      background: var(--dark-layout);
+      &:hover,
+      &-active {
+        box-shadow: 0 5px 20px -10px rgba($white,.3);
+      }
+    }
+  }
+  &-select-my {
+    &--input {
+      background: var(--dark-layout);
+      &:hover,
+      &-active {
+        background: var(--dark-layout);
+        box-shadow: 0 5px 20px -10px rgba(white,.3);
+      }
+      &-active {
+        background: var(--dark-layout);
+        box-shadow: 0 5px 20px -15px rgba(white,.3);
+        &:hover {
+          box-shadow: 0 5px 20px -15px rgba(white,.3);
+        }
+      }
+    }
+    &--hidden {
+      background: var(--dark-layout);
+      box-shadow: 0 3px 15px -5px rgba(white,.2);
+    }
+    &--value {
+      color: var(--dark-color);
+    }
+    &--icon {
+      color: var(--dark-color);
+    }
+  }
+  &-glass{
+    transition: all .5s ease;
+    background: rgba(30,32,35,.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+.light-mode{
+  &-bg, &-layout, &-color{
+    transition: all .5s ease;
+  }
+  &-bg, &-layout{
+    color: var(--light-color);
+  }
+  &-bg{
+    background: var(--light-bg);
+    &2{
+      background: var(--light-bg2);
+    }
+    &3{
+      background: var(--light-bg3);
+    }
+  }
+  &-layout{
+    background: var(--light-layout);
+  }
+  &-color{
+    color: var(--light-color);
+    &2{
+      color: var(--light-color2);
+    }
+  }
+  &-primary {
+    background: var(--light-primary);
+    color: white;
+  }
+  &-border{
+    &-top{
+      border-top: 1px solid var(--light-border);
+    }
+    &-bottom{
+      border-bottom: 1px solid var(--light-border);
+    }
+  }
+  &-placeholder{
+    color: $grey-light;
+  }
+  &-table{
+    & thead{
+      & tr{
+        &:first-child{
+          &:hover{
+            background: var(--light-layout);
+          }
+        }
+      }
+    }
+    & tbody{
+      & tr{
+        &:hover{
+          background: var(--light-bg2);
+        }
+      }
+    }
+  }
+  &-input-my {
+    &, input {
+      &::placeholder {
+        color: $grey-light;
+      }
+    }
+    &--input, &--input-nh{
+      background: $light;
+      &-active {
+        background: $white;
+        box-shadow: 0 5px 20px -10px rgba($dark,.3);
+      }
+    }
+    &--input {
+      &:hover,
+      &-active {
+        background: $white;
+        box-shadow: 0 5px 20px -10px rgba($dark,.3);
+      }
+    }
+    &-email {
+      &, input {
+          &::placeholder {
+          color: $grey-light;
+        }
+      }
+      &--input {
+        background: $light;
+        &:hover,
+        &-active {
+          background: $white;
+          box-shadow: 0 5px 20px -10px rgba($dark,.3);
+        }
+      }
+    }
+  }
+  &-textarea-my {
+    &, textarea {
+      &::placeholder {
+        color: $grey-light;
+      }
+    }
+    &--input {
+      background: $light;
+      &:hover,
+      &-active {
+        box-shadow: 0 5px 20px -10px rgba($dark,.3);
+        background: $white;
+      }
+    }
+  }
+  &-select-my {
+    &--input {
+      background: var(--light-layout);
+      &:hover,
+      &-active {
+        background: var(--light-bg);
+        box-shadow: 0 5px 20px -10px rgba($dark,.3);
+      }
+      &-active {
+        background: var(--light-layout);
+        box-shadow: 0 5px 20px -15px rgba($dark,.3);
+        &:hover {
+          box-shadow: 0 5px 20px -15px rgba($dark,.3);
+        }
+      }
+    }
+    &--hidden {
+      background: var(--light-layout);
+      box-shadow: 0 3px 15px -5px rgba($dark, .2);
+    }
+    &--value {
+      color: $dark;
+    }
+    &--icon {
+      color: $dark;
+    }
+  }
+  &-glass{
+    transition: all .5s ease;
+    background: rgba(255,255,255,.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+// text
+.primary-text {color: $primary;}
+.link-text {color: $link;}
+.info-text {color: $info;}
+.warning-text {color: $warning;}
+.danger-text {color: $danger;}
+.success-text {color: $success;}
+.dark-text {color: $dark;}
+.light-text {color: $light;}
+.black-text {color: $black;}
+.white-text {color: $white;}
+
+.dark{
+  &-primary-text {color: var(--dark-primary);}
+  &-link-text {color: var(--dark-link);}
+  &-info-text {color: var(--dark-info);}
+  &-warning-text {color: var(--dark-warning);}
+  &-danger-text {color: var(--dark-danger);}
+  &-success-text {color: var(--dark-success);}
+}
+
+// disable
+.disable {
+  opacity: .5;
+  // cursor: not-allowed !important;
+  pointer-events: none;
+}
+// color
+.has-background-white-blus {
+  background: $white-blus !important;
+}
+// color-flat
+.primary {background:$primary; color:$white;}
+.link {background:$link; color:$white;}
+.info {background:$info; color:$white;}
+.warning {background:$warning; color:$white;}
+.danger {background:$danger; color:$white;}
+.success {background:$success; color:$white;}
+.light {background:$light; color:$black;}
+.dark {background:$dark; color:$white;}
+.white {background:$white; color:$black;}
+.black {background:$black; color:$white;}
+
+.dark {
+  &-primary {background:var(--dark-primary); color:$white;}
+  &-link {background:var(--dark-link); color:$white;}
+  &-info {background:var(--dark-info); color:$white;}
+  &-warning {background:var(--dark-warning); color:var(--dark-shades1);}
+  &-danger {background:var(--dark-danger); color:$white;}
+  &-success {background:var(--dark-success); color:$white;}
+}
+
+// color-light
+.primary-light {background:rgba($primary,.1); color:$primary;}
+.link-light {background:rgba($link,.1); color:$link;}
+.info-light {background:rgba($info,.1); color:$info;}
+.warning-light {background:rgba($warning,.1); color:$warning;}
+.danger-light {background:rgba($danger,.1); color:$danger;}
+.success-light {background:rgba($success,.1); color:$success;}
+
+// color-flat--light-border
+.primary-light-border {background:$primary-light; color:$primary; border: 2px solid rgba($primary,.3)!important; 
+  &:hover{border: 2px solid rgba($primary,1)!important;}}
+.link-light-border {background:$link-light; color:$link; border: 2px solid rgba($link,.3)!important; 
+  &:hover{border: 2px solid rgba($link,1)!important;}}
+.info-light-border {background:$info-light; color:$info; border: 2px solid rgba($info,.3)!important; 
+  &:hover{border: 2px solid rgba($info,1)!important;}}
+.warning-light-border {background:$warning-light; color:$warning; border: 2px solid rgba($warning,.3)!important; 
+  &:hover{border: 2px solid rgba($warning,1)!important;}}
+.danger-light-border {background:$danger-light; color:$danger; border: 2px solid rgba($danger,.3)!important; 
+  &:hover{border: 2px solid rgba($danger,1)!important;}}
+.success-light-border {background:$success-light; color:$success; border: 2px solid rgba($success,.3)!important; 
+  &:hover{border: 2px solid rgba($success,1)!important;}}
+.white-border {background:$white; color:$dark; border: 2px solid rgba($grey-lighter,.3)!important; 
+    &:hover{border: 2px solid rgba($grey-lighter,1)!important;}}
+
+// color-glow
+.primary-glow {
+  &:hover{box-shadow: 0 10px 15px -5px rgba($primary,.6);}}
+.link-glow { 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($link,.6);}}
+.info-glow { 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($info,.6);}}
+.warning-glow { 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($warning,.6);}}
+.danger-glow { 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($danger,.6);}}
+.success-glow { 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($success,.6);}}
+.light-glow {background:$light; color:$black; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($light,.6);}}
+.dark-glow {background:$dark; color:$white; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($dark,.3);}}
+.white-glow {background:$white; color:$black; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($white,.6);}}
+
+// color-glow--light
+.primary-light-glow {background:rgba($primary,.1); color:$primary;
+  &:hover{box-shadow: 0 10px 15px -5px rgba($primary,.6);}}
+.link-light-glow {background:rgba($link,.1); color:$link; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($link,.6);}}
+.info-light-glow {background:rgba($info,.1); color:$info; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($info,.6);}}
+.warning-light-glow {background:rgba($warning,.1); color:$warning; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($warning,.6);}}
+.danger-light-glow {background:rgba($danger,.1); color:$danger; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($danger,.6);}}
+.success-light-glow {background:rgba($success,.1); color:$success; 
+  &:hover{box-shadow: 0 10px 15px -5px rgba($success,.6);}}
+
+// color-transparent
+.primary-transparent {color:$primary; border: 2px solid rgba($primary,.1) !important;
+  &:hover{background:rgba($primary,.1);}}
+.link-transparent {color:$link; border: 2px solid rgba($link,.1) !important;
+    &:hover{background:rgba($link,.1);}}
+.info-transparent {color:$info; border: 2px solid rgba($info,.1) !important;
+  &:hover{background:rgba($info,.1);}}
+.warning-transparent {color:$warning; border: 2px solid rgba($warning,.1) !important;
+  &:hover{background:rgba($warning,.1);}}
+.danger-transparent {color:$danger; border: 2px solid rgba($danger,.1) !important;
+  &:hover{background:rgba($danger,.1);}}
+.success-transparent {color:$success; border: 2px solid rgba($success,.1) !important;
+  &:hover{background:rgba($success,.1);}}
+.dark-transparent {color:#8d8fa2; border: 2px solid rgba(#8d8fa2,.1) !important;
+  &:hover{background:rgba($white,.15);}}
+.light-transparent {color:$black; border: 2px solid rgba($black,.1) !important;
+  &:hover{background:rgba($light,.5);}}
+
+// gradient
+.primary-gradient-1 {background: linear-gradient(-45deg, #7d33ff 0%, #CDBFFF 75%);}
+.link-gradient-1 {background: linear-gradient(-45deg, #1a5cff 0%, #BFD1FF 75%);}
+.info-gradient-1 {background: linear-gradient(-45deg, #3bdec8 0%, #baebe4 75%);}
+.warning-gradient-1 {background: linear-gradient(-45deg, #ffba00 0%, #F4DDB7 75%);}
+.danger-gradient-1 {background: linear-gradient(-45deg, #ff4757 0%, #F3B6CA 75%);}
+.success-gradient-1 {background: linear-gradient(-45deg, #46c93a 0%, #97C9AC 75%);}
+.light-gradient {background: linear-gradient(-45deg, #8a94ab 0%, #d7d8db 75%);}
+.dark-gradient {background: linear-gradient(-45deg, #1A1D34 0%, #686B85 75%);}
+
+// border
+.border-bottom{
+  &-primary{ input,textarea{ &:focus{ border-bottom: 2px solid $primary; }}}
+  &-link{ input,textarea{ &:focus{ border-bottom: 2px solid $link; }}}
+  &-info{ input,textarea{ &:focus{ border-bottom: 2px solid $info; }}}
+  &-warning{ input,textarea{ &:focus{ border-bottom: 2px solid $warning; }}}
+  &-danger{ input,textarea{ &:focus{ border-bottom: 2px solid $danger; }}}
+  &-success{ input,textarea{ &:focus{ border-bottom: 2px solid $success; }}}
+  &-dark{ input,textarea{ &:focus{ border-bottom: 2px solid $dark; }}}
+  &-light{ input,textarea{ &:focus{ border-bottom: 2px solid $light; }}}
+  &-black{ input,textarea{ &:focus{ border-bottom: 2px solid $black; }}}
+  &-white{ input,textarea{ &:focus{ border-bottom: 2px solid $white; }}}
+  &-2{ 
+    &-danger{ border-bottom: 2px solid $danger !important;} 
+    &-success{ border-bottom: 2px solid $success !important;}
+    &-info{ border-bottom: 2px solid $info !important;}
+  }
+}
+
+// option
+.option{
+  &-primary{ &:hover, &-active{ color: $primary; background: rgba($primary,.1); }}
+  &-link{ &:hover, &-active{ color: $link; background: rgba($link,.1); }}
+  &-info{ &:hover, &-active{ color: $info; background: rgba($info,.1); }}
+  &-warning{ &:hover, &-active{ color: $warning; background: rgba($warning,.1); }}
+  &-danger{ &:hover, &-active{ color: $danger; background: rgba($danger,.1); }}
+  &-success{ &:hover, &-active{ color: $success; background: rgba($success,.1); }}
+  &-dark{ &:hover, &-active{ color: $dark; background: $grey-darker; }}
+  &-light{ &:hover, &-active{ color: $light; background: $grey-lighter; }}
+  &-white{ &:hover, &-active{ color: $white; background: $light; }}
+  &-black{ &:hover, &-active{ color: $black; background: $grey-darker; }}
+}
