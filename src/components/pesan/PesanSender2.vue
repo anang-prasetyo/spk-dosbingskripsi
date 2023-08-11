@@ -1,44 +1,75 @@
 <template>
-  <div class="contact" :class="lightMode ? 'light-mode-layout contact-light' : 'dark-mode-layout contact-dark'">
-    <div class="left">
-      <div class="main sm" :class="user.background">
-        <verify-icon v-if="isVerify" class="icon-verify" :style="lightMode ? 'background: white;' : 'background: black;'" />
-        <heart-circle-icon v-if="isFav" class="dot-select primary pulse" :style="lightMode ? 'border: 2px solid white;' : 'border: 2px solid black;'" />
-        <div v-if="isGCBaru" class="dot-select warning" :style="lightMode ? 'border: 2px solid white;' : 'border: 2px solid black;'"></div>
-        <img :src="user.url" :alt="user.url">
+  <div v-if="!isChatting">
+    <div class="contact" :class="lightMode ? 'light-mode-layout contact-light' : 'dark-mode-layout contact-dark'">
+      <div class="left">
+        <div class="main sm" :class="user.background">
+          <verify-icon v-if="isVerify" class="icon-verify" :style="lightMode ? 'background: white;' : 'background: black;'" />
+          <heart-circle-icon v-if="isFav" class="dot-select primary pulse" :style="lightMode ? 'border: 2px solid white;' : 'border: 2px solid black;'" />
+          <div v-if="isGCBaru" class="dot-select warning" :style="lightMode ? 'border: 2px solid white;' : 'border: 2px solid black;'"></div>
+          <img :src="user.url" :alt="user.url">
+        </div>
+      </div>
+      <div v-if="thisUser" class="pesan">
+        <div class="pesan-top" :style="thisUser.user.userLevel === 'Admin' ? 'margin: auto 0' : ''">
+          <div v-if="gender === 'Perempuan'" class="pesan-user">Bu {{sender}}</div>
+          <div v-else-if="gender === 'Laki-laki'" class="pesan-user">Pak {{sender}}</div>
+        </div>
+        <div v-if="thisUser.user.userLevel === 'Mahasiswa'" class="pesan-bot">
+          <div class="button-my" :class="lightMode ? 'light-transparent' : 'dark-transparent'">Gabung</div>
+        </div>
+        <div class="batas" :class="lightMode ? 'batas-light' : 'batas-dark'"></div>
       </div>
     </div>
-    <div class="pesan">
-      <div class="pesan-top">
-        <div v-if="gender === 'Perempuan'" class="pesan-user">Bu {{sender}}</div>
-        <div v-else-if="gender === 'Laki-laki'" class="pesan-user">Pak {{sender}}</div>
-        <div v-if="(new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth() && (new Date().getDate()) === createdAt.getDate()" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">{{ (String(createdAt.getHours()).padStart(2, '0') + ':' + String(createdAt.getMinutes()).padStart(2, '0')) }}</div>
-        <div v-else-if="(new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth() && (new Date().getDate()) - createdAt.getDate() === 1" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Kemarin</div>
-        <div v-else-if="(new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth() && (new Date().getDate()) - createdAt.getDate() < 7">
-          <div v-if="createdAt.getDay() === 1" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Senin</div>
-          <div v-else-if="createdAt.getDay() === 2" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Selasa</div>
-          <div v-else-if="createdAt.getDay() === 3" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Rabu</div>
-          <div v-else-if="createdAt.getDay() === 4" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Kamis</div>
-          <div v-else-if="createdAt.getDay() === 5" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Jum'at</div>
-          <div v-else-if="createdAt.getDay() === 6" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Sabtu</div>
-          <div v-else-if="createdAt.getDay() === 7" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Minggu</div>
+  </div>
+  <div v-else>
+    <div v-if="thisUser" class="contact" :class="lightMode ? 'light-mode-layout contact-light' : 'dark-mode-layout contact-dark'">
+      <div class="left">
+        <div class="main sm" :class="user.background">
+          <verify-icon v-if="isVerify" class="icon-verify" :style="lightMode ? 'background: white;' : 'background: black;'" />
+          <heart-circle-icon v-if="isFav" class="dot-select primary pulse" :style="lightMode ? 'border: 2px solid white;' : 'border: 2px solid black;'" />
+          <div v-if="isGCBaru" class="dot-select warning" :style="lightMode ? 'border: 2px solid white;' : 'border: 2px solid black;'"></div>
+          <img :src="user.url" :alt="user.url">
         </div>
-        <div v-else class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">{{createdAt.getDate()+'/'+createdAt.getMonth()+'/'+createdAt.getFullYear()}}</div>
       </div>
-      <div class="pesan-bot">
-        <div class="pesan-status" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">{{latest}}</div>
-        <div v-if="unreadMsg !== 0 && unreadMsg !== -1" class="dot danger">{{ unreadMsg }}</div>
+      <div v-if="thisUser" class="pesan">
+        <div class="pesan-top">
+          <div v-if="gender === 'Perempuan'" class="pesan-user">Bu {{sender}}</div>
+          <div v-else-if="gender === 'Laki-laki'" class="pesan-user">Pak {{sender}}</div>
+          <div v-if="(new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth() && (new Date().getDate()) === createdAt.getDate()" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">{{ (String(createdAt.getHours()).padStart(2, '0') + ':' + String(createdAt.getMinutes()).padStart(2, '0')) }}</div>
+          <div v-else-if="(new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth() && (new Date().getDate()) - createdAt.getDate() === 1" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Kemarin</div>
+          <div v-else-if="(new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth() && (new Date().getDate()) - createdAt.getDate() < 7">
+            <div v-if="createdAt.getDay() === 1" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Senin</div>
+            <div v-else-if="createdAt.getDay() === 2" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Selasa</div>
+            <div v-else-if="createdAt.getDay() === 3" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Rabu</div>
+            <div v-else-if="createdAt.getDay() === 4" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Kamis</div>
+            <div v-else-if="createdAt.getDay() === 5" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Jum'at</div>
+            <div v-else-if="createdAt.getDay() === 6" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Sabtu</div>
+            <div v-else-if="createdAt.getDay() === 7" class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">Minggu</div>
+          </div>
+          <div v-else class="pesan-jam" :class="lightMode ? 'typography-semu-light' : 'typography-semu-dark'">{{createdAt.getDate()+'/'+createdAt.getMonth()+'/'+createdAt.getFullYear()}}</div>
+        </div>
+        <div v-if="thisUser.joinChatAt.toDate().getFullYear() <= createdAt.getFullYear() && thisUser.joinChatAt.toDate().getMonth() <= createdAt.getMonth() && thisUser.joinChatAt.toDate().getDate() <= createdAt.getDate() && thisUser.user.userLevel !== 'Dosen'" class="pesan-bot">
+          <div v-if="((thisUser.joinChatAt.toDate().getHours()*3600) + (thisUser.joinChatAt.toDate().getMinutes() * 60) + thisUser.joinChatAt.toDate().getSeconds()) < ((createdAt.getHours()*3600) + (createdAt.getMinutes() * 60) + createdAt.getSeconds()) || thisUser.joinChatAt.toDate().getFullYear() <= new Date().getFullYear() && thisUser.joinChatAt.toDate().getMonth() <= new Date().getMonth() && thisUser.joinChatAt.toDate().getDate() <= new Date().getDate()" class="pesan-status" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">{{latest}}</div>
+          <div v-else class="pesan-status" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">Baru bergabung</div>
+          <div v-if="unreadMsg !== 0 && unreadMsg !== -1" class="dot danger">{{ unreadMsg }}</div>
+        </div>
+        <div v-else-if="thisUser.user.userLevel === 'Dosen'" class="pesan-bot">
+          <div class="pesan-status" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">{{latest}}</div>
+          <div v-if="unreadMsg !== 0 && unreadMsg !== -1" class="dot danger">{{ unreadMsg }}</div>
+        </div>
+        <div class="batas" :class="lightMode ? 'batas-light' : 'batas-dark'"></div>
       </div>
-      <div class="batas" :class="lightMode ? 'batas-light' : 'batas-dark'"></div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { defineAsyncComponent } from 'vue';
+import { useAuth } from '../../firebase/firebase';
 
 const HeartCircleIcon = defineAsyncComponent(() => import('../../components/icons/HeartCircleIcon.vue'))
 const VerifyIcon = defineAsyncComponent(() => import('../../components/icons/VerifyIcon.vue'))
+const { thisUser } = useAuth()
 
 defineProps({
   sender: String,
@@ -52,7 +83,8 @@ defineProps({
   isFav: Boolean,
   isGCBaru: Boolean,
   isVerify: Boolean,
-  lightMode: Boolean
+  lightMode: Boolean,
+  isChatting: Boolean
 })
 
 </script>

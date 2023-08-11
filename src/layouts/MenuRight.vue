@@ -86,7 +86,8 @@
       <div id="layout-right-title" class="typography-callout my-4" style="overflow-wrap: anywhere; margin: 1rem;">Pemberitahuan</div>
       <div id="layout-right-title-mobile" class="hover-u-primary mb-4 curzr-hover text-125 text-semi-bold" style="display: inline-flex;">Pemberitahuan</div>
       <div v-if="afterChat" class="progres" :class="lightMode ? 'light-mode-layout' : 'dark-mode-layout'">
-        <router-link to="/pesan">
+        <a>
+        <!-- <a href="/pesan" @click.prevent="$router.replace('/pesan')"> -->
           <div class="progres-list" 
           :class="lightMode ? 'light-mode-color' : 'dark-mode-color'" :style="lightMode ? 'border-bottom: 1px solid rgba(0,0,0,.05);' : 'border-bottom: 1px solid rgba(255,255,255,.1);'">
             <div class="dot" :class="thisChat[0].messagesUnreadDosen !== 0 ? 'danger' : 'success'">{{thisChat[0].messagesUnreadDosen}}</div>
@@ -97,34 +98,37 @@
             <div class="dot" :class="thisChat[0].applicationsTotal !== 0 ? 'danger' : 'success'">{{thisChat[0].applicationsTotal}}</div>
             <div>Ajuan bimbingan skripsi</div>
           </div>
-        </router-link>
-        <router-link to="/profil">
+        </a>
+        <a>
+        <!-- <a href="/profil" @click.prevent="$router.replace('/profil')"> -->
           <div class="progres-list" 
           :class="lightMode ? 'light-mode-color' : 'dark-mode-color'" :style="lightMode ? 'border-bottom: 1px solid rgba(0,0,0,.05);' : 'border-bottom: 1px solid rgba(255,255,255,.1);'">
             <div class="dot" :class="thisChat[0].applicationsAccept.length !== 0 ? 'danger' : 'success'">{{thisChat[0].applicationsAccept.length}}</div>
             <div>Bimbingan skripsi</div>
           </div>
-        </router-link>
+        </a>
       </div>
     </div>
     <div v-else-if="thisUser.user.userLevel === 'Admin'" class="">
       <div id="layout-right-title" class="typography-callout my-4" style="overflow-wrap: anywhere; margin: 1rem;">Pemberitahuan</div>
       <div id="layout-right-title-mobile" class="hover-u-primary mb-4 curzr-hover text-125 text-semi-bold" style="display: inline-flex;">Pemberitahuan</div>
       <div class="progres" :class="lightMode ? 'light-mode-layout' : 'dark-mode-layout'">
-        <router-link to="/kriteria">
+        <a>
+        <!-- <a href="/kriteria" @click.prevent="$router.replace('/kriteria')"> -->
           <div class="progres-list" 
           :class="lightMode ? 'light-mode-color' : 'dark-mode-color'" :style="lightMode ? 'border-bottom: 1px solid rgba(0,0,0,.05);' : 'border-bottom: 1px solid rgba(255,255,255,.1);'">
             <div class="dot danger">{{ kriteria.length }}</div>
             <div>Jumlah kriteria</div>
           </div>
-        </router-link>
-        <router-link to="/alternatif">
+        </a>
+        <a>
+        <!-- <a href="/alternatif" @click.prevent="$router.replace('/alternatif')"> -->
           <div class="progres-list" 
           :class="lightMode ? 'light-mode-color' : 'dark-mode-color'">
             <div class="dot danger">{{ alternatif.length }}</div>
             <div>Jumlah alternatif</div>
           </div>
-        </router-link>
+        </a>
       </div>
     </div>
   </div>
@@ -160,6 +164,7 @@ defineProps({
     align-items: center;
     gap: .5rem;
     padding: .5rem;
+    cursor: default;
     &:last-child {
       border-bottom: 0px;
     }

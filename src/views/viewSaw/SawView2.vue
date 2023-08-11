@@ -1,6 +1,6 @@
 <template>
   <div class="base">
-    <!-- <loading-component v-if="loading" :msg="logMsg" :lightMode="lightMode" /> -->
+    <loading-component v-if="loading" :msg="logMsg" :lightMode="lightMode" />
     <div id="saw-content-my" class="content-my" :style="tahap.tahap3 === true || apaSudahHitungSaw === 'sudah' ? '' : 'max-width: 100% !important;'">
       <div class="content-my--head" :class="lightMode ? 'light-mode-glass' : 'dark-mode-glass'">
         <div class="content-my--head-value text-semi-bold text-125">Simple Additive Weighting</div>
@@ -427,6 +427,7 @@
                                   :id="krt.namaKriteria" 
                                   :value="{namaKriteria: krt.namaKriteria,idKriteria: krt.idKriteria}"
                                   v-model="selectDocs" 
+                                  disabled
                                 />
                                 <div class="state p-primary">
                                   <label :for="krt.namaKriteria">{{ krt.namaKriteria }}</label>
@@ -436,6 +437,7 @@
                             <div class="mt-5 paragraph">
                               <p>Kriteria saya : <span v-for="sd in selectDocs" :key="sd" class="tag is-primary mx-1">{{ sd.namaKriteria }}</span></p>
                             </div>
+                            <!-- <div>selectDocs : {{ selectDocs }}</div> -->
                           </div>
                         </div>
                       </div>
@@ -834,7 +836,7 @@
                   <div class="paragraph" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">
                     <p>Untuk melihat lebih lanjut mengenai perhitungan rekomendasi dosen pembimbing skripsi dengan menggunakan metode SAW, silahkan klik tombol <span class="code" :class="lightMode ? 'code-light' : 'code-dark'">Buat Dokumen SAW Baru</span> di bawah ini untuk membuat dokumen SAW baru.</p>
                   </div>
-                  <div class="button-my glow primary-glow mt-5" :class="lightMode ? 'primary' : 'dark-primary'" @click="apaSudahHitungSaw = 'belum', awal = false">Buat Dokumen SAW Baru</div>
+                  <div class="button-my glow primary-glow mt-5" :class="lightMode ? 'primary' : 'dark-primary'" @click="apaSudahHitungSaw = 'belum', awal = false, toSelectDocs()">Buat Dokumen SAW Baru</div>
                 </div>
               </div>
               <loading-component v-else :msg="logMsg" :lightMode="lightMode" />
@@ -877,6 +879,16 @@ const loading = ref(false)
 const awal = ref(true)
 const toastMsg = ref(null)
 const showToastDanger = ref(null)
+
+const toSelectDocs = () => {
+  let jmlKriteria = kriteria.value.length
+  for (let a=0; a<jmlKriteria; a++){
+    selectDocs.value.push({
+      namaKriteria: kriteria.value[a].namaKriteria,
+      idKriteria: kriteria.value[a].idKriteria
+    })
+  }
+}
 
 const toHitung = async() => {
   loading.value = true
@@ -942,8 +954,8 @@ const handleToggleMenu = async(a) => {
 }
 
 onMounted(async() => {
-  loading.value = true
-  await delay(100)
+  // loading.value = true
+  // await delay(100)
   el4.value = true
   await delay(100)
   el3.value = true
@@ -951,8 +963,8 @@ onMounted(async() => {
   el2.value = true
   await delay(100)
   el1.value = true
-  await delay(100)
-  loading.value = false
+  // await delay(100)
+  // loading.value = false
 })
 </script>
 

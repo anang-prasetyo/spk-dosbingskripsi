@@ -33,56 +33,57 @@
               <div v-if="groupChatDosen && thisUser.user.userLevel === 'Dosen'">
                 <div id="pesan-sender-mobile">
                   <div>
-                    <a style="color: #000" :href="'#'+getCamellCase(groupChatDosen.alternatif.namaDosen.namaDepan + groupChatDosen.alternatif.namaDosen.namaBelakang)">
-                      <div v-if="groupChatDosen.messagesLatest.text">
-                        <div v-if="(groupChatDosen.messagesLatest.userId === thisUser?.user.userId)">
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="groupChatDosen.alternatif.profile"
-                            :gender="groupChatDosen.alternatif.gender"
-                            :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
-                            :latest="('Saya : ' + groupChatDosen.messagesLatest.text)"
-                            :jam="(groupChatDosen.messagesLatest.time)"
-                            :date="(groupChatDosen.messagesLatest.date)"
-                            :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="0"
-                            :isVerify = groupChatDosen.isVerify
-                            @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), pesanIsi = 'open', isVerify = groupChatDosen.isVerify"
-                          />
-                        </div>
-                        <div v-else>
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="groupChatDosen.alternatif.profile"
-                            :gender="groupChatDosen.alternatif.gender"
-                            :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
-                            :latest="(groupChatDosen.messagesLatest.userName + ' : ' + groupChatDosen.messagesLatest.text)"
-                            :jam="(groupChatDosen.messagesLatest.time)"
-                            :date="(groupChatDosen.messagesLatest.date)"
-                            :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="groupChatDosen.messagesUnreadDosen"
-                            :isVerify = groupChatDosen.isVerify
-                            @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), pesanIsi = 'open', isVerify = groupChatDosen.isVerify, resetUnreadDosen()"
-                          />
-                        </div>
+                    <div v-if="groupChatDosen.messagesLatest.text">
+                      <div v-if="(groupChatDosen.messagesLatest.userId === thisUser?.user.userId)">
+                        <pesan-sender-2
+                          :light-mode="lightMode"
+                          :user="groupChatDosen.alternatif.profile"
+                          :gender="groupChatDosen.alternatif.gender"
+                          :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
+                          :latest="('Saya : ' + groupChatDosen.messagesLatest.text)"
+                          :jam="(groupChatDosen.messagesLatest.time)"
+                          :date="(groupChatDosen.messagesLatest.date)"
+                          :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
+                          :unreadMsg="0"
+                          :isVerify = groupChatDosen.isVerify
+                          :isChatting="thisUser.progres.isChatting"
+                          @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), pesanIsi = 'open', isVerify = groupChatDosen.isVerify"
+                        />
                       </div>
                       <div v-else>
                         <pesan-sender-2
                           :light-mode="lightMode"
                           :user="groupChatDosen.alternatif.profile"
                           :gender="groupChatDosen.alternatif.gender"
-                          :sender="(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang)"
-                          :latest="'Baru dibuat'"
-                          :jam="groupChatDosen.messagesLatest.time"
-                          :date="groupChatDosen.messagesLatest.date"
+                          :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
+                          :latest="(groupChatDosen.messagesLatest.userName + ' : ' + groupChatDosen.messagesLatest.text)"
+                          :jam="(groupChatDosen.messagesLatest.time)"
+                          :date="(groupChatDosen.messagesLatest.date)"
                           :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
-                          :unreadMsg="-1"
-                          :isGCBaru="true"
+                          :unreadMsg="groupChatDosen.messagesUnreadDosen"
                           :isVerify = groupChatDosen.isVerify
-                          @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), pesanIsi = 'open', isVerify = groupChatDosen.isVerify"
+                          :isChatting="thisUser.progres.isChatting"
+                          @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), pesanIsi = 'open', isVerify = groupChatDosen.isVerify, resetUnreadDosen()"
                         />
                       </div>
-                    </a>
+                    </div>
+                    <div v-else>
+                      <pesan-sender-2
+                        :light-mode="lightMode"
+                        :user="groupChatDosen.alternatif.profile"
+                        :gender="groupChatDosen.alternatif.gender"
+                        :sender="(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang)"
+                        :latest="'Baru dibuat'"
+                        :jam="groupChatDosen.messagesLatest.time"
+                        :date="groupChatDosen.messagesLatest.date"
+                        :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
+                        :unreadMsg="-1"
+                        :isGCBaru="true"
+                        :isVerify = groupChatDosen.isVerify
+                        :isChatting="thisUser.progres.isChatting"
+                        @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), pesanIsi = 'open', isVerify = groupChatDosen.isVerify"
+                      />
+                    </div>
                     <div class="applications">
                       <div class="applications-title-mobile">
                         <div>Ajuan bimbingan skripsi</div>
@@ -122,56 +123,57 @@
                 </div>
                 <div id="pesan-sender">
                   <div>
-                    <a style="color: #000" :href="'#'+getCamellCase(groupChatDosen.alternatif.namaDosen.namaDepan + groupChatDosen.alternatif.namaDosen.namaBelakang)">
-                      <div v-if="groupChatDosen.messagesLatest.text">
-                        <div v-if="(groupChatDosen.messagesLatest.userId === thisUser?.user.userId)">
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="groupChatDosen.alternatif.profile"
-                            :gender="groupChatDosen.alternatif.gender"
-                            :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
-                            :latest="('Saya : ' + groupChatDosen.messagesLatest.text)"
-                            :jam="(groupChatDosen.messagesLatest.time)"
-                            :date="(groupChatDosen.messagesLatest.date)"
-                            :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="0"
-                            :isVerify = groupChatDosen.isVerify
-                            @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), isVerify = groupChatDosen.isVerify"
-                          />
-                        </div>
-                        <div v-else>
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="groupChatDosen.alternatif.profile"
-                            :gender="groupChatDosen.alternatif.gender"
-                            :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
-                            :latest="(groupChatDosen.messagesLatest.userName + ' : ' + groupChatDosen.messagesLatest.text)"
-                            :jam="(groupChatDosen.messagesLatest.time)"
-                            :date="(groupChatDosen.messagesLatest.date)"
-                            :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="groupChatDosen.messagesUnreadDosen"
-                            :isVerify = groupChatDosen.isVerify
-                            @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), isVerify = groupChatDosen.isVerify, resetUnreadDosen()"
-                          />
-                        </div>
+                    <div v-if="groupChatDosen.messagesLatest.text">
+                      <div v-if="(groupChatDosen.messagesLatest.userId === thisUser?.user.userId)">
+                        <pesan-sender-2
+                          :light-mode="lightMode"
+                          :user="groupChatDosen.alternatif.profile"
+                          :gender="groupChatDosen.alternatif.gender"
+                          :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
+                          :latest="('Saya : ' + groupChatDosen.messagesLatest.text)"
+                          :jam="(groupChatDosen.messagesLatest.time)"
+                          :date="(groupChatDosen.messagesLatest.date)"
+                          :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
+                          :unreadMsg="0"
+                          :isVerify = groupChatDosen.isVerify
+                    :isChatting="thisUser.progres.isChatting"
+                          @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), isVerify = groupChatDosen.isVerify"
+                        />
                       </div>
                       <div v-else>
                         <pesan-sender-2
                           :light-mode="lightMode"
                           :user="groupChatDosen.alternatif.profile"
                           :gender="groupChatDosen.alternatif.gender"
-                          :sender="(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang)"
-                          :latest="'Baru dibuat'"
-                          :jam="groupChatDosen.messagesLatest.time"
-                          :date="groupChatDosen.messagesLatest.date"
+                          :sender="((groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang))"
+                          :latest="(groupChatDosen.messagesLatest.userName + ' : ' + groupChatDosen.messagesLatest.text)"
+                          :jam="(groupChatDosen.messagesLatest.time)"
+                          :date="(groupChatDosen.messagesLatest.date)"
                           :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
-                          :unreadMsg="-1"
-                          :isGCBaru="true"
+                          :unreadMsg="groupChatDosen.messagesUnreadDosen"
                           :isVerify = groupChatDosen.isVerify
-                          @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), isVerify = groupChatDosen.isVerify"
+                    :isChatting="thisUser.progres.isChatting"
+                          @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), isVerify = groupChatDosen.isVerify, resetUnreadDosen()"
                         />
                       </div>
-                    </a>
+                    </div>
+                    <div v-else>
+                      <pesan-sender-2
+                        :light-mode="lightMode"
+                        :user="groupChatDosen.alternatif.profile"
+                        :gender="groupChatDosen.alternatif.gender"
+                        :sender="(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang)"
+                        :latest="'Baru dibuat'"
+                        :jam="groupChatDosen.messagesLatest.time"
+                        :date="groupChatDosen.messagesLatest.date"
+                        :created-at="groupChatDosen.messagesLatest.createdAt.toDate()"
+                        :unreadMsg="-1"
+                        :isGCBaru="true"
+                        :isVerify = groupChatDosen.isVerify
+                    :isChatting="thisUser.progres.isChatting"
+                        @click="jumpTo2(groupChatDosen.idGroupChat,(groupChatDosen.alternatif.namaDosen.namaDepan + ' ' + groupChatDosen.alternatif.namaDosen.namaBelakang),groupChatDosen.alternatif.gender,groupChatDosen.alternatif.profile), isVerify = groupChatDosen.isVerify, resetUnreadDosen()"
+                      />
+                    </div>
                     <div class="applications">
                       <div class="applications-title">
                         <div>Ajuan bimbingan skripsi</div>
@@ -211,240 +213,282 @@
                 </div>
               </div>
               <div v-else>
-                <div id="pesan-sender-mobile">
-                  <div v-if="newFav.includes(true)">
-                    <div
-                      v-for="(gc,g) in groupChat"
-                      :key="gc.idGroupChat"
-                    >
-                    <a style="color: #000" :href="'#'+getCamellCase(gc.alternatif.namaDosen.namaDepan + gc.alternatif.namaDosen.namaBelakang)">
-                      <div v-if="gc.messagesLatest.text">
-                        <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="gc.alternatif.profile"
-                            :gender="gc.alternatif.gender"
-                            :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                            :latest="('Saya : ' + gc.messagesLatest.text)"
-                            :jam="(gc.messagesLatest.time)"
-                            :date="(gc.messagesLatest.date)"
-                            :created-at="gc.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="newArrUnread[g]"
-                            :isFav="newFav[g]"
-                            :isVerify="gc.isVerify"
-                            @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
-                          />
-                        </div>
-                        <div v-else>
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="gc.alternatif.profile"
-                            :gender="gc.alternatif.gender"
-                            :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                            :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
-                            :jam="(gc.messagesLatest.time)"
-                            :date="(gc.messagesLatest.date)"
-                            :created-at="gc.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="newArrUnread[g]"
-                            :isFav="newFav[g]"
-                            :isVerify="gc.isVerify"
-                            @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
-                          />
-                        </div>
-                      </div>
-                      <div v-else>
-                        <pesan-sender-2
-                          :light-mode="lightMode"
-                          :user="gc.alternatif.profile"
-                          :gender="gc.alternatif.gender"
-                          :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
-                          :latest="'Baru dibuat'"
-                          :jam="gc.messagesLatest.time"
-                          :date="gc.messagesLatest.date"
-                          :created-at="gc.messagesLatest.createdAt.toDate()"
-                          :unreadMsg="-1"
-                          :isGCBaru="true"
-                          :isVerify="gc.isVerify"
-                          @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
-                        />
-                      </div>
-                    </a>
-                    </div>
-                  </div>
-                  <div v-else>
-                    <div
-                      v-for="(gc,g) in groupChat"
-                      :key="gc.idGroupChat"
-                    >
-                      <a style="color: #000" :href="'#'+getCamellCase(gc.alternatif.namaDosen.namaDepan + gc.alternatif.namaDosen.namaBelakang)">
-                        <div v-if="gc.messagesLatest.text">
-                          <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
-                            <pesan-sender-2
-                              :light-mode="lightMode"
-                              :user="gc.alternatif.profile"
-                              :gender="gc.alternatif.gender"
-                              :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                              :latest="('Saya : ' + gc.messagesLatest.text)"
-                              :jam="(gc.messagesLatest.time)"
-                              :date="(gc.messagesLatest.date)"
-                              :created-at="gc.messagesLatest.createdAt.toDate()"
-                              :unreadMsg="newArrUnread[g]"
-                              :isVerify="gc.isVerify"
-                              @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
-                            />
-                          </div>
-                          <div v-else>
-                            <pesan-sender-2
-                              :light-mode="lightMode"
-                              :user="gc.alternatif.profile"
-                              :gender="gc.alternatif.gender"
-                              :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                              :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
-                              :jam="(gc.messagesLatest.time)"
-                              :date="(gc.messagesLatest.date)"
-                              :created-at="gc.messagesLatest.createdAt.toDate()"
-                              :unreadMsg="newArrUnread[g]"
-                              :isVerify="gc.isVerify"
-                              @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
-                            />
-                          </div>
-                        </div>
-                        <div v-else>
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="gc.alternatif.profile"
-                            :gender="gc.alternatif.gender"
-                            :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
-                            :latest="'Baru dibuat'"
-                            :jam="gc.messagesLatest.time"
-                            :date="gc.messagesLatest.date"
-                            :created-at="gc.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="-1"
-                            :isGCBaru="true"
-                            :isVerify="gc.isVerify"
-                            @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
-                          />
-                        </div>
-                      </a>
-                    </div>
+                <!-- <div v-if="userGC.length !== 0">
+                  <div>sudah join {{ userGC[0].idGroupChat }}</div>
+                  <div>idGroupChat : {{ groupChat[0].idGroupChat }}</div>
+                </div> -->
+                <div v-if="!thisUser.progres.isChatting">
+                  <div
+                    v-for="gc in groupChat1"
+                    :key="gc.idGroupChat"
+                  >
+                    <pesan-sender-2
+                      :light-mode="lightMode"
+                      :user="gc.alternatif.profile"
+                      :gender="gc.alternatif.gender"
+                      :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
+                      :isGCBaru="true"
+                      :isVerify="gc.isVerify"
+                      :isChatting="thisUser.progres.isChatting"
+                      @click="gabungGC(gc)"
+                    />
                   </div>
                 </div>
-                <div id="pesan-sender">
-                  <div v-if="newFav.includes(true)">
-                    <div
-                      v-for="(gc,g) in groupChat"
-                      :key="gc.idGroupChat"
-                    >
-                    <a style="color: #000" :href="'#'+getCamellCase(gc.alternatif.namaDosen.namaDepan + gc.alternatif.namaDosen.namaBelakang)">
-                      <div v-if="gc.messagesLatest.text">
-                        <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="gc.alternatif.profile"
-                            :gender="gc.alternatif.gender"
-                            :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                            :latest="('Saya : ' + gc.messagesLatest.text)"
-                            :jam="(gc.messagesLatest.time)"
-                            :date="(gc.messagesLatest.date)"
-                            :created-at="gc.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="newArrUnread[g]"
-                            :isFav="newFav[g]"
-                            :isVerify="gc.isVerify"
-                            @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
-                          />
-                        </div>
-                        <div v-else>
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="gc.alternatif.profile"
-                            :gender="gc.alternatif.gender"
-                            :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                            :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
-                            :jam="(gc.messagesLatest.time)"
-                            :date="(gc.messagesLatest.date)"
-                            :created-at="gc.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="newArrUnread[g]"
-                            :isFav="newFav[g]"
-                            :isVerify="gc.isVerify"
-                            @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
-                          />
-                        </div>
-                      </div>
-                      <div v-else>
-                        <pesan-sender-2
-                          :light-mode="lightMode"
-                          :user="gc.alternatif.profile"
-                          :gender="gc.alternatif.gender"
-                          :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
-                          :latest="'Baru dibuat'"
-                          :jam="gc.messagesLatest.time"
-                          :date="gc.messagesLatest.date"
-                          :created-at="gc.messagesLatest.createdAt.toDate()"
-                          :unreadMsg="-1"
-                          :isGCBaru="true"
-                          :isVerify="gc.isVerify"
-                          @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
-                        />
-                      </div>
-                    </a>
-                    </div>
-                  </div>
-                  <div v-else>
-                    <div
-                      v-for="(gc,g) in groupChat"
-                      :key="gc.idGroupChat"
-                    >
-                      <a style="color: #000" :href="'#'+getCamellCase(gc.alternatif.namaDosen.namaDepan + gc.alternatif.namaDosen.namaBelakang)">
-                        <div v-if="gc.messagesLatest.text">
-                          <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
-                            <pesan-sender-2
-                              :light-mode="lightMode"
-                              :user="gc.alternatif.profile"
-                              :gender="gc.alternatif.gender"
-                              :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                              :latest="('Saya : ' + gc.messagesLatest.text)"
-                              :jam="(gc.messagesLatest.time)"
-                              :date="(gc.messagesLatest.date)"
-                              :created-at="gc.messagesLatest.createdAt.toDate()"
-                              :unreadMsg="newArrUnread[g]"
-                              :isVerify="gc.isVerify"
-                              @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
-                            />
+                <div v-else>
+                  <div id="pesan-sender-mobile">
+                    <div v-if="newFav.includes(true)">
+                      <div
+                        v-for="(gc,g) in groupChat"
+                        :key="gc.idGroupChat"
+                      >
+                        <div v-if="gc.idGroupChat === thisUser.isFav[0]">
+                          <div v-if="gc.messagesLatest.text">
+                            <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="('Saya : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isFav="newFav[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
+                              />
+                            </div>
+                            <div v-else>
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isFav="newFav[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
+                              />
+                            </div>
                           </div>
                           <div v-else>
                             <pesan-sender-2
                               :light-mode="lightMode"
                               :user="gc.alternatif.profile"
                               :gender="gc.alternatif.gender"
-                              :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
-                              :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
-                              :jam="(gc.messagesLatest.time)"
-                              :date="(gc.messagesLatest.date)"
+                              :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
+                              :latest="'Baru dibuat'"
+                              :jam="gc.messagesLatest.time"
+                              :date="gc.messagesLatest.date"
                               :created-at="gc.messagesLatest.createdAt.toDate()"
-                              :unreadMsg="newArrUnread[g]"
+                              :unreadMsg="-1"
+                              :isGCBaru="true"
                               :isVerify="gc.isVerify"
+                              :isChatting="thisUser.progres.isChatting"
+                              @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else>
+                      <div
+                        v-for="(gc,g) in groupChat"
+                        :key="gc.idGroupChat"
+                      >
+                        <div v-if="gc.idGroupChat === thisUser.isFav[0]">
+                          <div v-if="gc.messagesLatest.text">
+                            <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="('Saya : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
+                              />
+                            </div>
+                            <div v-else>
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
+                              />
+                            </div>
+                          </div>
+                          <div v-else>
+                            <pesan-sender-2
+                              :light-mode="lightMode"
+                              :user="gc.alternatif.profile"
+                              :gender="gc.alternatif.gender"
+                              :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
+                              :latest="'Baru dibuat'"
+                              :jam="gc.messagesLatest.time"
+                              :date="gc.messagesLatest.date"
+                              :created-at="gc.messagesLatest.createdAt.toDate()"
+                              :unreadMsg="-1"
+                              :isGCBaru="true"
+                              :isVerify="gc.isVerify"
+                              :isChatting="thisUser.progres.isChatting"
+                              @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), pesanIsi = 'open', isVerify = gc.isVerify"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="pesan-sender">
+                    <div v-if="newFav.includes(true)">
+                      <div
+                        v-for="(gc,g) in groupChat"
+                        :key="gc.idGroupChat"
+                      >
+                        <div v-if="gc.idGroupChat === thisUser.isFav[0]">
+                        <!-- <a style="color: #000" :href="'#'+getCamellCase(gc.alternatif.namaDosen.namaDepan + gc.alternatif.namaDosen.namaBelakang)"> -->
+                          <div v-if="gc.messagesLatest.text">
+                            <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="('Saya : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isFav="newFav[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
+                              />
+                            </div>
+                            <div v-else>
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isFav="newFav[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
+                              />
+                            </div>
+                          </div>
+                          <div v-else>
+                            <pesan-sender-2
+                              :light-mode="lightMode"
+                              :user="gc.alternatif.profile"
+                              :gender="gc.alternatif.gender"
+                              :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
+                              :latest="'Baru dibuat'"
+                              :jam="gc.messagesLatest.time"
+                              :date="gc.messagesLatest.date"
+                              :created-at="gc.messagesLatest.createdAt.toDate()"
+                              :unreadMsg="-1"
+                              :isGCBaru="true"
+                              :isVerify="gc.isVerify"
+                              :isChatting="thisUser.progres.isChatting"
                               @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
                             />
                           </div>
                         </div>
-                        <div v-else>
-                          <pesan-sender-2
-                            :light-mode="lightMode"
-                            :user="gc.alternatif.profile"
-                            :gender="gc.alternatif.gender"
-                            :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
-                            :latest="'Baru dibuat'"
-                            :jam="gc.messagesLatest.time"
-                            :date="gc.messagesLatest.date"
-                            :created-at="gc.messagesLatest.createdAt.toDate()"
-                            :unreadMsg="-1"
-                            :isGCBaru="true"
-                            :isVerify="gc.isVerify"
-                            @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
-                          />
-                        </div>
-                      </a>
+                      </div>
                     </div>
+                    <div v-else>
+                      <div
+                        v-for="(gc,g) in groupChat"
+                        :key="gc.idGroupChat"
+                      >
+                        <div v-if="gc.idGroupChat === thisUser.isFav[0]">
+                          <div v-if="gc.messagesLatest.text">
+                            <div v-if="(gc.messagesLatest.userId === thisUser?.user.userId)">
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="('Saya : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
+                              />
+                            </div>
+                            <div v-else>
+                              <pesan-sender-2
+                                :light-mode="lightMode"
+                                :user="gc.alternatif.profile"
+                                :gender="gc.alternatif.gender"
+                                :sender="((gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang))"
+                                :latest="(gc.messagesLatest.userName + ' : ' + gc.messagesLatest.text)"
+                                :jam="(gc.messagesLatest.time)"
+                                :date="(gc.messagesLatest.date)"
+                                :created-at="gc.messagesLatest.createdAt.toDate()"
+                                :unreadMsg="newArrUnread[g]"
+                                :isVerify="gc.isVerify"
+                                :isChatting="thisUser.progres.isChatting"
+                                @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
+                              />
+                            </div>
+                          </div>
+                          <div v-else>
+                            <pesan-sender-2
+                              :light-mode="lightMode"
+                              :user="gc.alternatif.profile"
+                              :gender="gc.alternatif.gender"
+                              :sender="(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang)"
+                              :latest="'Baru dibuat'"
+                              :jam="gc.messagesLatest.time"
+                              :date="gc.messagesLatest.date"
+                              :created-at="gc.messagesLatest.createdAt.toDate()"
+                              :unreadMsg="-1"
+                              :isGCBaru="true"
+                              :isVerify="gc.isVerify"
+                              :isChatting="thisUser.progres.isChatting"
+                              @click="jumpTo(g,gc.idGroupChat,(gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang),gc.alternatif.gender,gc.alternatif.profile), isVerify = gc.isVerify"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display: flex; padding: 1rem; justify-content: center;">
+                      <div class="button-my" :class="lightMode ? 'light-transparent' : 'dark-transparent'" @click="tinggalkanGC(thisUser.isFav[0])">Tinggalkan Grup</div>
+                    </div>
+                    <!-- <div>join date : {{ thisUser.joinChatAt.toDate().getDate() + ' ' + (thisUser.joinChatAt.toDate().getMonth() + 1) + ' ' + thisUser.joinChatAt.toDate().getFullYear() }}</div>
+                    <div>join time : {{ thisUser.joinChatAt.toDate().getSeconds() + ' ' + thisUser.joinChatAt.toDate().getMinutes() + ' ' + thisUser.joinChatAt.toDate().getHours() }}</div>
+                    <div>{{ ((thisUser.joinChatAt.toDate().getHours()*3600) + (thisUser.joinChatAt.toDate().getMinutes() * 60) + thisUser.joinChatAt.toDate().getSeconds()) }}</div> -->
                   </div>
                 </div>
               </div>
@@ -502,7 +546,7 @@ const PesanIsi2 = defineAsyncComponent(() => import('../../components/pesan/Pesa
 const PesanSender2 = defineAsyncComponent(() => import('../../components/pesan/PesanSender2.vue'))
 
 const { thisUser } = useAuth()
-const { groupChat, participants, messages, currentOption, newArrUnread, isCliked, newFav, filterUnreadOnly, getDataGroupChat, jumpTo, jumpTo2, updateChatting, updateUsers, getDocChatting, applications, getApplications, getDocAlternatif } = useDatabase()
+const { groupChat, groupChat1, participants, messages, currentOption, newArrUnread, isCliked, newFav, filterUnreadOnly, getDataGroupChat, getDataGroupChat1, resetTo, jumpTo, jumpTo2, updateChatting, updateUsers, getDocChatting, applications, getApplications, getDocAlternatif } = useDatabase()
 
 defineProps({
   lightMode: Boolean
@@ -623,12 +667,77 @@ const handleToggleMenu = async(a) => {
   isMenu.value = a
 }
 
+// const userGC = ref([])
+const gabungGC = (gc) => {
+  let _gender = gc.alternatif.gender
+  let _nick = null
+  _gender === "Laki-laki" ? _nick = "Pak" :  _nick = "Bu"
+  var userEditData = {
+    'progres.isChatting': true,
+    'joinChatAt': new Date(),
+    'leaveChatAt': null,
+    'isFav': firebase.firestore.FieldValue.arrayUnion(gc.idGroupChat)
+  }
+  const updateDataUser = () => {
+    updateUsers(thisUser.value.user.userId, userEditData)
+  }
+  swal({
+    title: "Konfirmasi",
+    text: "Nama Grup : " + _nick + " " + gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang + "\n" +
+    "Peserta : " + gc.participants + "\n" + 
+    "\n Gabung dengan grup percakapan ini?",
+    buttons: ["Batal", "Gabung"],
+  })
+  .then((willJoin) => {
+    if (willJoin) {
+      // userGC.value.push(gc)
+      updateDataUser()
+      swal({
+        text:"Selamat, kamu berhasil bergabung ke grub percakapan " + _nick + " " + gc.alternatif.namaDosen.namaDepan + ' ' + gc.alternatif.namaDosen.namaBelakang
+      })
+    }
+  })
+}
+const tinggalkanGC = (id) => {
+  var userEditData = {
+    'progres.isChatting': false,
+    'leaveChatAt': new Date(),
+    'isFav': firebase.firestore.FieldValue.arrayRemove(id)
+  }
+  var chattingEditData = {
+    'participants': firebase.firestore.FieldValue.increment(-1)
+  }
+  const updateDataUser = () => {
+    updateUsers(thisUser.value.user.userId, userEditData)
+  }
+  const updateDataChatting = () => {
+    updateChatting(id, chattingEditData)
+    getDocChatting(id).collection('participants').doc(thisUser.value.user.userId).delete()
+  }
+  swal({
+    title: "Konfirmasi",
+    text: "Apakah kamu yakin ingin pergi meninggalkan grup ini? Kamu tidak lagi dapat melihat dan mengirim pesan di grup ini lagi.",
+    buttons: ["Batal", "Pergi"]
+  })
+  .then((willLeave) => {
+    if(willLeave){
+      updateDataUser()
+      updateDataChatting()
+      // _isReset.value = true
+      // _isCliked.value = null
+      // setTimeout(() => {_isReset.value = false}, 250)
+      resetTo()
+    }
+  })
+}
+
 onMounted( async() => {
   loading.value = true
   await getDataGroupChat()
+  await getDataGroupChat1()
   swal({
-    title: "Info",
-    text: "Fitur ini memungkinkan kamu untuk berkomunikasi dengan teman-teman informatika dan dosen informatika.",
+    title: "Penting!",
+    text: "Kamu bisa memulai percakapan setelah bergabung dengan grup chat. Setelah bergabung, kamu tidak bisa lagi bergabung dengan grup chat lainnya. Keluar dari grup chat jika kamu ingin berganti grup chat.",
     button: "Mengerti",
     closeOnClickOutside: false,
   })

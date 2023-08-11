@@ -9,9 +9,9 @@
           <!-- <img src="../../assets/favicon2.ico" alt="" class=""> -->
           <logo-icon class="logo" :class="lightMode ? 'primary-text' : 'dark-primary-text'" />
           <!-- <div class="text-semi-bold text-3 welcome-left-2">SPKPDPS</div> -->
-          <div class="text-semi-bold text-3" :class="lightMode ? 'primary-text' : 'dark-primary-text'">SPKPDPS.</div>
+          <div class="text-semi-bold text-3" :class="lightMode ? 'primary-text' : 'dark-primary-text'">SPK-PDPS.</div>
           <!-- <div class="text-gradient text-semi-bold text-3">SPKPDPS.</div> -->
-        <p class="text-book text-15 line-h-2 mt-5" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">SPKPDPS adalah (Sistem Pendukung Keputusan Pemilihan Dosen Pembimbing Skripsi) dengan menggunakan metode SAW (Simple Additive Weighting) di prodi Informatika UMS.</p>
+        <p class="text-book text-15 line-h-2 mt-5" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">SPK-PDPS adalah (Sistem Pendukung Keputusan Pemilihan Dosen Pembimbing Skripsi) dengan menggunakan metode SAW (Simple Additive Weighting) di prodi Informatika UMS.</p>
         <div class="button-my glow primary-glow button-my-headline curzr-hover mt-6 text-semi-bold" :class="lightMode ? 'primary' : 'dark-primary'" @click="openModal()">Cari dosbing skripsi-ku</div>
         <!-- <div class="button-my glow primary-gradient-2 button-my-headline curzr-hover mt-6 text-semi-bold" @click="openModal()">Cari dosbing skripsi-ku</div> -->
         <!-- <div class="button-my glow primary-gradient-2 button-my-headline curzr-hover mt-6 text-semi-bold" @click="openModal()">Cari dosbing skripsi-ku</div> -->
@@ -20,7 +20,7 @@
         <p class="text-book text-15 line-h-2" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">Kamu berencana mengambil mata kuliah Tugas Akhir (TA) atau Skripsi tapi bingung nentuin siapa dosen pembimbing skripsi yang sesuai buatmu?</p>
       </div>
       <div>
-        <p class="text-book text-15 line-h-2" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">SPKPDPS siap membantu agar kamu memiliki pertimbangan sebelum memilih dosen pembimbing skripsi. Kamu akan diberikan beberapa rekomendasi dosen pembimbing skripsi yang sesuai dengan minatmu.</p>
+        <p class="text-book text-15 line-h-2" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">SPK-PDPS siap membantu agar kamu memiliki pertimbangan sebelum memilih dosen pembimbing skripsi. Kamu akan diberikan beberapa rekomendasi dosen pembimbing skripsi yang sesuai dengan minatmu.</p>
       </div>
       <div>
         <p class="text-book text-15 line-h-2" :class="lightMode ? 'light-mode-color2' : 'dark-mode-color2'">Kamu bebas memilih <span class="text-semi-bold text-15 line-h-2" :class="lightMode ? 'light-mode-color' : 'dark-mode-color'">hingga 8 kriteria</span> untuk mencari rekomendasi dosen pembimbing skripsi dari <span class="text-semi-bold text-15 line-h-2" :class="lightMode ? 'light-mode-color' : 'dark-mode-color'">total 21 alternatif.</span></p>

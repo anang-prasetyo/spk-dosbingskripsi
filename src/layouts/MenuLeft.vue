@@ -5,7 +5,7 @@
         <div v-if="!isMenuOpen" class="side-top-logo">
           <!-- <img src="../assets/favicon2.ico" alt="" class="mx-1" style="max-width: 3rem;"/> -->
           <logo-icon class="mx-1" style="max-width: 3rem;" :class="lightMode ? 'primary-text' : 'dark-primary-text'" />
-          <div class="text-15 text-semi-bold">SPKPDPS.</div>
+          <div class="text-15 text-semi-bold">SPK-PDPS.</div>
         </div>
       </div>
       <div v-for="p, index in pages" :key="index">
@@ -18,8 +18,8 @@
     <div style="margin: .5rem 1rem 1rem; display: flex; flex-direction: column; gap: 1rem;">
       <div class="button-my danger-transparent curzr-hover" @click="keluar()">Sign Out</div>
       <div style="display: flex; justify-content: space-between; gap: 1rem; height: 37.06px;">
-        <div class="button-my curzr-hover" :class="!lightMode ? 'dark-transparent' : 'dark-mode-bg'" style="width:100%;" @click="lightMode = false, $emit('mode', lightMode)">Dark</div>
-        <div class="button-my curzr-hover" :class="lightMode ? 'light-transparent' : 'light-mode-bg'" style="width:100%;" @click="lightMode = true, $emit('mode', lightMode)">Light</div>
+        <div class="button-my curzr-hover" :class="!lightMode ? 'dark-transparent' : 'dark-mode-bg'" style="width:100%;" @click="lightMode = false, $emit('mode', lightMode)">Gelap</div>
+        <div class="button-my curzr-hover" :class="lightMode ? 'light-transparent' : 'light-mode-bg'" style="width:100%;" @click="lightMode = true, $emit('mode', lightMode)">Terang</div>
       </div>
     </div>
   </div>

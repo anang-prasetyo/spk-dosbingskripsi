@@ -251,11 +251,14 @@ export function useSaw(){
   }
 
   const toSelectDocs = () => {
-    let jmlhKriteriaPart1 = kriteriaPart1.value.length
+    let jmlhKriteriaPart1 = kriteria.value.length
+    // let jmlhKriteriaPart1 = kriteriaPart1.value.length
     for (var i=0; i<jmlhKriteriaPart1; i++){
       selectDocs.value.push({
-        namaKriteria: kriteriaPart1.value[i].namaKriteria,
-        idKriteria: kriteriaPart1.value[i].idKriteria
+        namaKriteria: kriteria.value[i].namaKriteria,
+        // namaKriteria: kriteriaPart1.value[i].namaKriteria,
+        idKriteria: kriteria.value[i].idKriteria
+        // idKriteria: kriteriaPart1.value[i].idKriteria
       })
     }
   }
@@ -272,7 +275,8 @@ export function useSaw(){
     datas5.value = getAllKriteria().where('namaKriteria', 'in', someDocs.value).orderBy('namaKriteria', 'asc').onSnapshot(onDataChange5)
   }
   const getSomeDocsB = () => {
-    datas5.value = getAllKriteria().where('namaKriteria', 'in', someDocs.value).orderBy('bobotKriteria', 'desc').onSnapshot(onDataChange5)
+    datas5.value = getAllKriteria().where('namaKriteria', 'in', someDocs.value).orderBy('namaKriteria', 'asc').onSnapshot(onDataChange5)
+    // datas5.value = getAllKriteria().where('namaKriteria', 'in', someDocs.value).orderBy('bobotKriteria', 'desc').onSnapshot(onDataChange5)
   }
   const getSomeDocs2 = () => {
     let _newAlternatif = []

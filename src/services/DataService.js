@@ -479,6 +479,7 @@ export function useDatabase() {
   const dataParticipants = ref(null)
   const dataApplications = ref(null)
   const groupChat = ref([])
+  const groupChat1 = ref([])
   const groupChat2 = ref([])
   const participants = ref([])
   const applications = ref([])
@@ -579,6 +580,23 @@ export function useDatabase() {
       groupChat.value = _groupChat;  
     })
   }
+  const onDataChangeGroupChat1 = async(items) => {
+    let _groupChat1 = [];
+    await items.forEach((item) => {
+      let id = item.id;
+      let data = item.data();
+      _groupChat1.push({
+        idGroupChat: id,
+        alternatif: data.alternatif,
+        messagesLatest: data.messagesLatest,
+        participants: data.participants,
+        messagesUnreadDosen: data.messagesUnreadDosen,
+        unread: null,
+        isVerify: data.isVerify
+      })
+    })
+    groupChat1.value = _groupChat1;  
+  }
   const onDataChangeGroupChat2 = async(items) => {
     let _groupChat2 = [];
     await items.forEach((item) => {
@@ -610,6 +628,9 @@ export function useDatabase() {
   const getDataGroupChat = async() => {
     dataGroupChat.value = getAllChatting().orderBy("messagesLatest.createdAt", "desc").onSnapshot(onDataChangeGroupChat)
   }
+  const getDataGroupChat1 = async() => {
+    dataGroupChat.value = getAllChatting().orderBy("alternatif.namaDosen.namaDepan", "asc").onSnapshot(onDataChangeGroupChat1)
+  }
   const getDataGroupChat2 = async() => {
     dataGroupChat.value = getAllChatting().orderBy("alternatif.namaDosen.namaDepan", "asc").onSnapshot(onDataChangeGroupChat2)
   }
@@ -625,6 +646,13 @@ export function useDatabase() {
       }
     })
     newArrUnread.value.splice(g,1,0)
+  }
+  const resetTo = () => {
+    currentOption.value.idGC = null
+    currentOption.value.namaDosen = null
+    currentOption.value.gender = null
+    currentOption.value.selectedUser = null
+    isCliked.value = false
   }
   const jumpTo = async(g,idGC,namaDosen,gender,selectedUser) => {
     currentOption.value.idGC = idGC
@@ -710,7 +738,7 @@ export function useDatabase() {
     alternatif, alternatifTeratas, alternatifPart1, alternatifPart2, hitungJmlAlternatif, isRefAlternatif, getAllAlternatif, getDocAlternatif, deleteAlternatif, setAlternatif, updateAlternatif, alternatifEdit, isRefAlternatifEdit, 
     getAllChatting, getDocChatting, setChatting, updateChatting, deleteChatting, 
     getDocKriteria, batch, getDocSaw, updateSaw, getAllSaw, getDataSaw, addSaw, deleteSaw,
-    groupChat, groupChat2, participants, messages, currentOption, unreadMsgGroupChat, newArrUnread, isCliked, newFav, filterUnreadOnly, getDataGroupChat, getDataGroupChat2, resetMyUnread, jumpTo, jumpTo2, getDataParticipant,
+    groupChat, groupChat1, groupChat2, participants, messages, currentOption, unreadMsgGroupChat, newArrUnread, isCliked, newFav, filterUnreadOnly, getDataGroupChat, getDataGroupChat1, getDataGroupChat2, resetMyUnread, resetTo, jumpTo, jumpTo2, getDataParticipant,
     setUsers, updateUsers, applications, getApplications, getDocUsers, afterDosbing, dosbing, afterChat, thisChat, users, afterApplicationsAccept, applicationsAccept, isNewMsg, thisNewMsg, resetNewMsg
   }
 }

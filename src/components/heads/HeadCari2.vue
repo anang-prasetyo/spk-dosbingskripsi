@@ -136,11 +136,12 @@
               <span v-else>2/3</span>
               <div style="display: flex;gap: .5rem;">
                 <div class="text-semi-bold text-125">Kriteria Dosen</div>
-                <div class="text-085">*3 kriteria teratas</div>
+                <!-- <div class="text-085">*3 kriteria teratas</div> -->
               </div>
             </div>
             <div class="mt-3 mb-2 px-5 pb-4" style="max-height: 50vh;overflow: auto;">
-              <div v-for="(krt, index) in kriteriaPart1" :key="krt.idKriteria" class="full-w">
+              <!-- <div v-for="(krt, index) in kriteriaPart1" :key="krt.idKriteria" class="full-w"> -->
+              <div v-for="(krt, index) in kriteria" :key="krt.idKriteria" class="full-w">
                 <div v-if="krt.subKriteria != ''">
                   <div class="my-2">{{krt.namaKriteria}}</div>
                   <div class="input-my flex" :class="lightMode ? 'light-mode-input-my' : 'dark-mode-input-my'">
@@ -157,8 +158,10 @@
               </div>
             </div>
             <div class="px-5">
-              <div v-if="newSawName.length === 3 && editProfile.isSkripsi === true" class="py-3 button-my glow primary-glow flex mb-2" :class="lightMode ? 'primary' : 'dark-primary'" @click="step = 3, to3(), addUserSkripsi(editProfile.skripsi.judul, editProfile.skripsi.deskripsi)">Cari</div>
-              <div v-else-if="newSawName.length === 3" class="py-3 button-my glow primary-glow flex mb-2" :class="lightMode ? 'primary' : 'dark-primary'" @click="step = 3, to3(), addUserSkripsi(userSkripsi.judul, userSkripsi.deskripsi)">Cari</div>
+              <div v-if="newSawName.length === 8 && editProfile.isSkripsi === true" class="py-3 button-my glow primary-glow flex mb-2" :class="lightMode ? 'primary' : 'dark-primary'" @click="step = 3, to3(), addUserSkripsi(editProfile.skripsi.judul, editProfile.skripsi.deskripsi)">Cari</div>
+              <!-- <div v-if="newSawName.length === 3 && editProfile.isSkripsi === true" class="py-3 button-my glow primary-glow flex mb-2" :class="lightMode ? 'primary' : 'dark-primary'" @click="step = 3, to3(), addUserSkripsi(editProfile.skripsi.judul, editProfile.skripsi.deskripsi)">Cari</div> -->
+              <div v-else-if="newSawName.length === 8" class="py-3 button-my glow primary-glow flex mb-2" :class="lightMode ? 'primary' : 'dark-primary'" @click="step = 3, to3(), addUserSkripsi(userSkripsi.judul, userSkripsi.deskripsi)">Cari</div>
+              <!-- <div v-else-if="newSawName.length === 3" class="py-3 button-my glow primary-glow flex mb-2" :class="lightMode ? 'primary' : 'dark-primary'" @click="step = 3, to3(), addUserSkripsi(userSkripsi.judul, userSkripsi.deskripsi)">Cari</div> -->
               <div v-else class="py-3 button-my primary disable flex mb-2">Cari</div>
               <div v-if="thisUser.user.userLevel === 'Mahasiswa'" class="button-my flex" :class="lightMode ? 'light-transparent' : 'dark-transparent'" @click="step = 1">Kembali</div>
             </div>
@@ -269,7 +272,7 @@ defineProps({
   lightMode: Boolean
 })
 
-const { apaSudahHitungSaw, rangkingAlternatif, lists, getSubCollectionDocSaw, handleCustomChanges, deleteTempDataSaw, toEksekusiTahapan1, eksekusiTahapan2, newSawName, logMsg } = useSaw()
+const { apaSudahHitungSaw, rangkingAlternatif, lists, getSubCollectionDocSaw, handleCustomChanges, deleteTempDataSaw, toEksekusiTahapan1, eksekusiTahapan2, newSawName, logMsg, kriteria } = useSaw()
 const SelectSingle = defineAsyncComponent(() => import('../selects/SelectSingle.vue'))
 const { userSkripsi, addUserSkripsi, editProfile, getUserData, thisUser } = useAuth()
 const {  kriteriaPart1 } = useDatabase()

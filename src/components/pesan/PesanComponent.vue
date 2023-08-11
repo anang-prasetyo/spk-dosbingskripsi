@@ -1,75 +1,151 @@
 <template>
-  <div>
-    <div v-if="isFirstToday === true && date === (new Date().getMonth()+1) + '/' + new Date().getDate() + '/' + new Date().getFullYear()" class="today-2">
-      <div class="today-2-strip" :class="lightMode ? 'today-2-strip-light-mode' : 'today-2-strip-dark-mode'"></div>
-      <div class="today-2-msg" :class="lightMode ? 'today-2-msg-light-mode' : 'today-2-msg-dark-mode'">Hari ini</div>
-    </div>
-    <div v-else-if="isFirstToday === true && (new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth()" class="today mt-4 mb-2">
-      <div v-if="(new Date().getDate()) - createdAt.getDate() === 1" class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">Kemarin</div>
-      <div v-else-if="(new Date().getDate()) - createdAt.getDate() < 7" class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">
-        <div v-if="createdAt.getDay() === 1" style="font-size: .85rem;">Senin</div>
-        <div v-else-if="createdAt.getDay() === 2" style="font-size: .85rem;">Selasa</div>
-        <div v-else-if="createdAt.getDay() === 3" style="font-size: .85rem;">Rabu</div>
-        <div v-else-if="createdAt.getDay() === 4" style="font-size: .85rem;">Kamis</div>
-        <div v-else-if="createdAt.getDay() === 5" style="font-size: .85rem;">Jum'at</div>
-        <div v-else-if="createdAt.getDay() === 6" style="font-size: .85rem;">Sabtu</div>
-        <div v-else-if="createdAt.getDay() === 7" style="font-size: .85rem;">Minggu</div>
-      </div>
-      <div 
-        v-else-if="createdAt.getDay() === 1" class="today-msg"
-        :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
-      >Senin, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-      <div 
-        v-else-if="createdAt.getDay() === 2" class="today-msg"
-        :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
-      >Selasa, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-      <div 
-        v-else-if="createdAt.getDay() === 3" class="today-msg"
-        :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
-      >Rabu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-      <div 
-        v-else-if="createdAt.getDay() === 4" class="today-msg"
-        :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
-      >Kamis, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-      <div 
-        v-else-if="createdAt.getDay() === 5" class="today-msg"
-        :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
-      >Jum'at, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-      <div 
-        v-else-if="createdAt.getDay() === 6" class="today-msg"
-        :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
-      >Sabtu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-      <div 
-        v-else-if="createdAt.getDay() === 7" class="today-msg"
-        :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
-      >Minggu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-    </div>
-    <div v-else-if="isFirstToday === true && (new Date().getFullYear()) === createdAt.getFullYear()" class="today mt-4 mb-2">
-      <div class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">{{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
-    </div>
-    <div v-else-if="isFirstToday === true" class="today mt-4 mb-2">
-      <div class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">{{ createdAt.getDate()+'/'+createdAt.getMonth()+'/'+createdAt.getFullYear() }}</div>
-    </div>
-    <div class="pesan-isi">
-      <div class="pesan-isi-bubble" :class="sender ? 'pesan-isi-bubble-me' : ''">
-        <div class="bubble" :class="[sender ? 'bubble--me' : 'bubble--you', lightMode ? 'light-mode-layout' : 'dark-mode-shades2', sender && lightMode ? 'light-mode-primary' : sender && !lightMode ? 'dark-mode-primary' : '']">
-          <div v-if="!sender" class="left">
-            <div class="main sm" :class="profile.background">
-              <img :src="profile.url" :alt="profile.avatar">
-            </div>
+  <div v-if="thisUser">
+    <div v-if="thisUser.joinChatAt.toDate().getFullYear() <= createdAt.getFullYear() && thisUser.joinChatAt.toDate().getMonth() <= createdAt.getMonth() && thisUser.joinChatAt.toDate().getDate() <= createdAt.getDate() && thisUser.user.userLevel !== 'Dosen'">
+      <div v-if="((thisUser.joinChatAt.toDate().getHours()*3600) + (thisUser.joinChatAt.toDate().getMinutes() * 60) + thisUser.joinChatAt.toDate().getSeconds()) < ((createdAt.getHours()*3600) + (createdAt.getMinutes() * 60) + createdAt.getSeconds()) || thisUser.joinChatAt.toDate().getFullYear() <= new Date().getFullYear() && thisUser.joinChatAt.toDate().getMonth() <= new Date().getMonth() && thisUser.joinChatAt.toDate().getDate() <= new Date().getDate()">
+        <div v-if="isFirstToday === true && date === (new Date().getMonth()+1) + '/' + new Date().getDate() + '/' + new Date().getFullYear()" class="today-2">
+          <div class="today-2-strip" :class="lightMode ? 'today-2-strip-light-mode' : 'today-2-strip-dark-mode'"></div>
+          <div class="today-2-msg" :class="lightMode ? 'today-2-msg-light-mode' : 'today-2-msg-dark-mode'">Hari ini</div>
+        </div>
+        <div v-else-if="isFirstToday === true && (new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth()" class="today mt-4 mb-2">
+          <div v-if="(new Date().getDate()) - createdAt.getDate() === 1" class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">Kemarin</div>
+          <div v-else-if="(new Date().getDate()) - createdAt.getDate() < 7" class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">
+            <div v-if="createdAt.getDay() === 1" style="font-size: .85rem;">Senin</div>
+            <div v-else-if="createdAt.getDay() === 2" style="font-size: .85rem;">Selasa</div>
+            <div v-else-if="createdAt.getDay() === 3" style="font-size: .85rem;">Rabu</div>
+            <div v-else-if="createdAt.getDay() === 4" style="font-size: .85rem;">Kamis</div>
+            <div v-else-if="createdAt.getDay() === 5" style="font-size: .85rem;">Jum'at</div>
+            <div v-else-if="createdAt.getDay() === 6" style="font-size: .85rem;">Sabtu</div>
+            <div v-else-if="createdAt.getDay() === 7" style="font-size: .85rem;">Minggu</div>
           </div>
-          <div>
-            <span v-if="!sender" class="text-semi-bold-2" :class="lightMode ? profile.color : 'dark-'+profile.color">{{ name }}</span>
-            <slot />
+          <div 
+            v-else-if="createdAt.getDay() === 1" class="today-msg"
+            :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+          >Senin, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+          <div 
+            v-else-if="createdAt.getDay() === 2" class="today-msg"
+            :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+          >Selasa, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+          <div 
+            v-else-if="createdAt.getDay() === 3" class="today-msg"
+            :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+          >Rabu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+          <div 
+            v-else-if="createdAt.getDay() === 4" class="today-msg"
+            :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+          >Kamis, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+          <div 
+            v-else-if="createdAt.getDay() === 5" class="today-msg"
+            :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+          >Jum'at, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+          <div 
+            v-else-if="createdAt.getDay() === 6" class="today-msg"
+            :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+          >Sabtu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+          <div 
+            v-else-if="createdAt.getDay() === 7" class="today-msg"
+            :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+          >Minggu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        </div>
+        <div v-else-if="isFirstToday === true && (new Date().getFullYear()) === createdAt.getFullYear()" class="today mt-4 mb-2">
+          <div class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">{{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        </div>
+        <div v-else-if="isFirstToday === true" class="today mt-4 mb-2">
+          <div class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">{{ createdAt.getDate()+'/'+createdAt.getMonth()+'/'+createdAt.getFullYear() }}</div>
+        </div>
+        <div class="pesan-isi">
+          <div class="pesan-isi-bubble" :class="sender ? 'pesan-isi-bubble-me' : ''">
+            <div class="bubble" :class="[sender ? 'bubble--me' : 'bubble--you', lightMode ? 'light-mode-layout' : 'dark-mode-shades2', sender && lightMode ? 'light-mode-primary' : sender && !lightMode ? 'dark-mode-primary' : '']">
+              <div v-if="!sender" class="left">
+                <div class="main sm" :class="profile.background">
+                  <img :src="profile.url" :alt="profile.avatar">
+                </div>
+              </div>
+              <div>
+                <span v-if="!sender" class="text-semi-bold-2" :class="lightMode ? profile.color : 'dark-'+profile.color">{{ name }}</span>
+                <slot />
+              </div>
+            </div>
+            <div class="jam">{{time}}</div>
           </div>
         </div>
-        <div class="jam">{{time}}</div>
+      </div>
+    </div>
+    <div v-else-if="thisUser.user.userLevel === 'Dosen'">
+      <div v-if="isFirstToday === true && date === (new Date().getMonth()+1) + '/' + new Date().getDate() + '/' + new Date().getFullYear()" class="today-2">
+        <div class="today-2-strip" :class="lightMode ? 'today-2-strip-light-mode' : 'today-2-strip-dark-mode'"></div>
+        <div class="today-2-msg" :class="lightMode ? 'today-2-msg-light-mode' : 'today-2-msg-dark-mode'">Hari ini</div>
+      </div>
+      <div v-else-if="isFirstToday === true && (new Date().getFullYear()) === createdAt.getFullYear() && (new Date().getMonth()) === createdAt.getMonth()" class="today mt-4 mb-2">
+        <div v-if="(new Date().getDate()) - createdAt.getDate() === 1" class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">Kemarin</div>
+        <div v-else-if="(new Date().getDate()) - createdAt.getDate() < 7" class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">
+          <div v-if="createdAt.getDay() === 1" style="font-size: .85rem;">Senin</div>
+          <div v-else-if="createdAt.getDay() === 2" style="font-size: .85rem;">Selasa</div>
+          <div v-else-if="createdAt.getDay() === 3" style="font-size: .85rem;">Rabu</div>
+          <div v-else-if="createdAt.getDay() === 4" style="font-size: .85rem;">Kamis</div>
+          <div v-else-if="createdAt.getDay() === 5" style="font-size: .85rem;">Jum'at</div>
+          <div v-else-if="createdAt.getDay() === 6" style="font-size: .85rem;">Sabtu</div>
+          <div v-else-if="createdAt.getDay() === 7" style="font-size: .85rem;">Minggu</div>
+        </div>
+        <div 
+          v-else-if="createdAt.getDay() === 1" class="today-msg"
+          :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+        >Senin, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        <div 
+          v-else-if="createdAt.getDay() === 2" class="today-msg"
+          :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+        >Selasa, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        <div 
+          v-else-if="createdAt.getDay() === 3" class="today-msg"
+          :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+        >Rabu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        <div 
+          v-else-if="createdAt.getDay() === 4" class="today-msg"
+          :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+        >Kamis, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        <div 
+          v-else-if="createdAt.getDay() === 5" class="today-msg"
+          :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+        >Jum'at, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        <div 
+          v-else-if="createdAt.getDay() === 6" class="today-msg"
+          :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+        >Sabtu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+        <div 
+          v-else-if="createdAt.getDay() === 7" class="today-msg"
+          :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'"
+        >Minggu, {{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+      </div>
+      <div v-else-if="isFirstToday === true && (new Date().getFullYear()) === createdAt.getFullYear()" class="today mt-4 mb-2">
+        <div class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">{{ createdAt.getDate() + ' ' + new Intl.DateTimeFormat(['ban', 'id'], options).format(createdAt) + ' ' + createdAt.getFullYear() }}</div>
+      </div>
+      <div v-else-if="isFirstToday === true" class="today mt-4 mb-2">
+        <div class="today-msg" :class="lightMode ? 'today-msg-light-mode' : 'today-msg-dark-mode'">{{ createdAt.getDate()+'/'+createdAt.getMonth()+'/'+createdAt.getFullYear() }}</div>
+      </div>
+      <div class="pesan-isi">
+        <div class="pesan-isi-bubble" :class="sender ? 'pesan-isi-bubble-me' : ''">
+          <div class="bubble" :class="[sender ? 'bubble--me' : 'bubble--you', lightMode ? 'light-mode-layout' : 'dark-mode-shades2', sender && lightMode ? 'light-mode-primary' : sender && !lightMode ? 'dark-mode-primary' : '']">
+            <div v-if="!sender" class="left">
+              <div class="main sm" :class="profile.background">
+                <img :src="profile.url" :alt="profile.avatar">
+              </div>
+            </div>
+            <div>
+              <span v-if="!sender" class="text-semi-bold-2" :class="lightMode ? profile.color : 'dark-'+profile.color">{{ name }}</span>
+              <slot />
+            </div>
+          </div>
+          <div class="jam">{{time}}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useAuth } from "../../firebase/firebase"
+
+const { thisUser } = useAuth()
+
 defineProps ({
   name: { type: String, default: '' },
   nick: { type: String },

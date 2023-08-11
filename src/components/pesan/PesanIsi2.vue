@@ -80,8 +80,14 @@
         </div>
         <div v-else class="isi-pesan m-0">
           <div class="isi-pesan-blank">
-            <div class="float-center">
-              Pilih kontak untuk memulai percakapan
+            <div v-if="thisUser.progres.isChatting" class="float-center">
+              Klik grup untuk menampilkan isi pesan
+            </div>
+            <div v-else-if="thisUser.user.userLevel !== 'Admin'" class="float-center">
+              Pilih grup dan klik "Gabung" untuk memulai percakapan
+            </div>
+            <div v-else class="float-center">
+              Pilih grup untuk melihat detail
             </div>
           </div>
         </div>
